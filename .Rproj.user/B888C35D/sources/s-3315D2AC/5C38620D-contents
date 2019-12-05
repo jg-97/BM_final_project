@@ -61,3 +61,17 @@ tbl <- tableby(gender ~ dept + clin + cert + prate + exper + rank + sal94 + sal9
 summary(tbl, title = "Descriptive Statistics: Salary and Covariates", labelTranslations = labels, text = T)
 ```
 
+```{r}
+law_df %>% 
+  ggplot(aes(y = sal94, x = gender))+
+  geom_boxplot(aes(fill = clin))+
+  theme_minimal()+
+  labs(x = 'Salary in  94')
+
+law_df %>% 
+  ggplot(aes(y = dif_sal, x = gender))+
+  geom_boxplot(aes(fill = clin))+
+  theme_minimal()+
+  labs(x = 'Difference in salary between 94 and 95')
+```
+

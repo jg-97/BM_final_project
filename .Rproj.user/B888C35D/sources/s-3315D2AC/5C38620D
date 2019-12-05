@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2885773968",
+    "hash" : "0",
     "id" : "5C38620D",
-    "lastKnownWriteTime" : 1575578487,
-    "last_content_update" : 1575578487948,
+    "lastKnownWriteTime" : 1575578636,
+    "last_content_update" : 1575578636,
     "path" : "E://BM_final_project/bm_final_prj.Rmd",
     "project_path" : "bm_final_prj.Rmd",
     "properties" : {
         "cursorPosition" : "27,33",
-        "scrollLine" : "0"
+        "scrollLine" : "35"
     },
     "read_only" : false,
     "read_only_alternatives" : [
