@@ -1,0 +1,63 @@
+---
+title: "bm_group_project"
+author: "Jin Ge"
+date: "12/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+library(tidyverse)
+library(caret)
+library(glmnet)
+library(arsenal)
+```
+
+## load and clean the data
+```{r loading_data}
+law_df <- read_csv("./Lawsuit.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(dept = factor(dept, labels = c("Biochemistry/Molecular Biology", 
+                 "Physiology", "Genetics", "Pediatrics", "Medicine", "Surgery")),
+         gender = factor(gender, labels = c("female", "male")),
+         clin = factor(clin, labels = c("clinical", "research")),
+         cert = factor(cert, labels = c("Not certified", "Board certified")),
+         rank = factor(rank, labels = c("assistant", "associate", "full")),
+         dif_sal = sal95 - sal94)
+```
+
+
+## descrptive statistics
+```{r descriptive_statistics}
+## adding table labels for each variable
+labels <- list(dept = "Department", 
+               gender = "Gender, n(%)", 
+               clin = "Clinical or Research, n(%)", 
+               cert = "Board certified, n(%)",
+               prate = "Publicaiton rate",
+               exper = "Experience period after MD", 
+               rank = "Professor title, n(%)",
+               sal94 = "Salary in 1994",
+               sal95 = "Salary in 1995",
+               dif_sal = "Difference of salary between 1994 and 1995")
+
+## control the descriptive information 
+control_tbl <- tableby.control(
+              test = F,
+              total = F,
+              numeric.stat = c("meansd", "medianq1q3", "iqr"),
+              cat.stat = c("countpct"),
+              digits = 2,
+              digits.pct = 2,
+              stat.labels = list(
+                meansd = "Mean (SD)",
+                medianq1q3 = "Median (Q1, Q3)",
+                iqr = "IQR",
+                countpct = "n (%)"))
+
+# change_df <- law_df %>% 
+#  mutate()
+```
+
