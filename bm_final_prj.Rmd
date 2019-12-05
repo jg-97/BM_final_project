@@ -73,20 +73,28 @@ law_df %>%
   geom_boxplot(aes(fill = clin))+
   theme_minimal()+
   labs(x = 'Difference in salary between 94 and 95')
+```
 
+```{r}
 #histograms of density curve
 law_df %>% 
-  ggplot(aes(x = sal94, color = gender))+
-  geom_histogram(aes(y = ..density..), fill = 'white', postion = 'dodge')+
-  geom_density()+
+  ggplot(aes(x = sal94, fill = gender))+
+  geom_histogram(aes(y = ..density..), alpha = 0.7, position="dodge2")+
+  geom_density(aes(color = gender), alpha = 0.4,show.legend = FALSE)+
   theme_minimal()+
-  labs(x = 'Salary in 94')
+  labs(x = 'Salary in 94',
+       y = '',
+       fill = 'Gender',
+       title = 'Salary in 94')
 
 law_df %>% 
-  ggplot(aes(x = dif_sal, color = gender))+
-  geom_histogram(aes(y = ..density..), fill = 'white', postion = 'dodge')+
-  geom_density(fill = 'white', alpha = 0.5)+
+  ggplot(aes(x = dif_sal, fill = gender))+
+  geom_histogram(aes(y = ..density..), alpha = 0.7, position="dodge2")+
+  geom_density(aes(color = gender), alpha = 0.4, show.legend = FALSE) +
   theme_minimal()+
-  labs(x = 'Difference in salary between 94 and 95')
+  labs(x = 'Difference in salary between 94 and 95',
+       y = '',
+       fill = 'Gender',
+       title = 'Difference in Salary between 94 and 95 ')
 ```
 
