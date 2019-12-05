@@ -2,7 +2,7 @@
 title: "bm_group_project"
 author: "Jin Ge"
 date: "12/5/2019"
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -57,7 +57,7 @@ control_tbl <- tableby.control(
                 iqr = "IQR",
                 countpct = "n (%)"))
 
-change_df <- law_df %>% 
-  mutate()
+tbl <- tableby(gender ~ dept + clin + cert + prate + exper + rank + sal94 + sal95 + dif_sal, data = law_df, control = control_tbl)
+summary(tbl, title = "Descriptive Statistics: Salary and Covariates", labelTranslations = labels, text = T)
 ```
 

@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1575576232997.000,
-    "dirty" : true,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "2885773968",
     "id" : "5C38620D",
-    "lastKnownWriteTime" : 1575577729,
-    "last_content_update" : 1575577903673,
+    "lastKnownWriteTime" : 1575578487,
+    "last_content_update" : 1575578487948,
     "path" : "E://BM_final_project/bm_final_prj.Rmd",
     "project_path" : "bm_final_prj.Rmd",
     "properties" : {
-        "cursorPosition" : "60,8",
-        "scrollLine" : "44"
+        "cursorPosition" : "27,33",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
