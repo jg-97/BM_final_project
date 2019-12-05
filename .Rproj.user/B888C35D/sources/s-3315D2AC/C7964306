@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575581981798.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "C7964306",
+    "lastKnownWriteTime" : 2459013923071747423,
+    "last_content_update" : 1575581981798,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "A04BAFA7",
+        "caption" : "title",
+        "contentUrl" : "grid_resource/gridviewer.html?env=_rs_no_env&obj=&cache_key=A04BAFA7",
+        "displayedObservations" : 13,
+        "environment" : "_rs_no_env",
+        "expression" : "structure(list(term = c(\"(Intercept)\", \"deptPhysiology\", \"deptGenetics\",  \"deptPediatrics\", \"deptMedicine\", \"deptSurgery\", \"gendermale\",  \"clinresearch\", \"certBoard certified\", \"prate\", \"exper\", \"rankassociate\",  \"rankfull\"), step = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),      estimate = c(58456.9136139834, -12332.2898808647, 20728.3815824845,      16937.8328825386, 70029.7044365617, 165580.574278042, -2571.96438577828,      14319.8238205892, 19564.258028531, -4162.49248553811, 3017.8409505585,      16619.9233571175, 33192.2131665177), lambda = c(85.8445050071972,      85.8445050071972, 85.8445050071972, 85.8445050071972, 85.8445050071972,      85.8445050071972, 85.8445050071972, 85.8445050071972, 85.8445050071972,      85.8445050071972, 85.8445050071972, 85.8445050071972, 85.8445050071972     ), dev.ratio = c(0.903997935395383, 0.903997935395383, 0.903997935395383,      0.903997935395383, 0.903997935395383, 0.903997935395383,      0.903997935395383, 0.903997935395383, 0.903997935395383,      0.903997935395383, 0.903997935395383, 0.903997935395383,      0.903997935395383)), row.names = c(NA, -13L), class = c(\"tbl_df\",  \"tbl\", \"data.frame\"))",
+        "object" : "",
+        "preview" : 0,
+        "totalObservations" : 13,
+        "variables" : 5
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

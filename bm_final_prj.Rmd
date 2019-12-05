@@ -66,7 +66,7 @@ law_df %>%
   ggplot(aes(y = sal94, x = gender))+
   geom_boxplot(aes(fill = clin))+
   theme_minimal()+
-  labs(x = 'Salary in  94')
+  labs(x = 'Salary in 94')
 
 law_df %>% 
   ggplot(aes(y = dif_sal, x = gender))+
@@ -75,26 +75,35 @@ law_df %>%
   labs(x = 'Difference in salary between 94 and 95')
 ```
 
-```{r}
-#histograms of density curve
-law_df %>% 
-  ggplot(aes(x = sal94, fill = gender))+
-  geom_histogram(aes(y = ..density..), alpha = 0.7, position="dodge2")+
-  geom_density(aes(color = gender), alpha = 0.4,show.legend = FALSE)+
-  theme_minimal()+
-  labs(x = 'Salary in 94',
-       y = '',
-       fill = 'Gender',
-       title = 'Salary in 94')
+## automatic stepwise trying
 
-law_df %>% 
-  ggplot(aes(x = dif_sal, fill = gender))+
-  geom_histogram(aes(y = ..density..), alpha = 0.7, position="dodge2")+
-  geom_density(aes(color = gender), alpha = 0.4, show.legend = FALSE) +
-  theme_minimal()+
-  labs(x = 'Difference in salary between 94 and 95',
-       y = '',
-       fill = 'Gender',
-       title = 'Difference in Salary between 94 and 95 ')
+```{r}
+full_ml <- lm(sal94 ~ dept + gender + clin + cert + prate + exper + rank, data = law_df)
+step(full_ml, direction = 'backward')
+step(lm(sal94 ~ 1., data = law_df), direction = 'forward', trace = 1, scope = formula(full_ml))
+step(full_ml, direction = 'both')
 ```
+
+## confounder
+
+```{r}
+## dept tested
+gender <- lm(log(sal94) ~ gender, data = law_df)
+dep <- lm(log(sal94) ~ gender + dept, data = law_df)
+summary(gender)
+summary(dep)
+
+## rank tested
+rank <- lm(log(sal94) ~ gender + rank, data = law_df)
+summary(rank)
+```
+
+## interaction
+
+```{r}
+interaction <- lm(log(sal94) ~ gender * clin * cert * exper, data = law_df)
+summary(interaction)
+```
+
+
 

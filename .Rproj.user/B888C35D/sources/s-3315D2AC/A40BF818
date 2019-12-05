@@ -1,19 +1,19 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1575576477515.000,
-    "dirty" : true,
+    "created" : 1575578883745.000,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "0",
-    "id" : "930FF390",
-    "lastKnownWriteTime" : 1568756824,
-    "last_content_update" : 1575578227691,
-    "path" : "E:/BM_hw1_jg4197/hw1_jg4197.Rmd",
+    "id" : "A40BF818",
+    "lastKnownWriteTime" : 1574195744,
+    "last_content_update" : 1574195744,
+    "path" : "D:/Biostat/Database/Lect18_ModSelect.R",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "60,120",
-        "scrollLine" : "51"
+        "cursorPosition" : "44,14",
+        "scrollLine" : "36"
     },
     "read_only" : false,
     "read_only_alternatives" : [
@@ -21,5 +21,5 @@
     "relative_order" : 3,
     "source_on_save" : false,
     "source_window" : "",
-    "type" : "r_markdown"
+    "type" : "r_source"
 }
