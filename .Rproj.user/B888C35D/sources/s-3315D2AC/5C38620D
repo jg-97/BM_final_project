@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575576232997.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5C38620D",
+    "lastKnownWriteTime" : 1575577729,
+    "last_content_update" : 1575577903673,
+    "path" : "E://BM_final_project/bm_final_prj.Rmd",
+    "project_path" : "bm_final_prj.Rmd",
+    "properties" : {
+        "cursorPosition" : "60,8",
+        "scrollLine" : "44"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
