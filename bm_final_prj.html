@@ -409,8 +409,50 @@ control_tbl &lt;- tableby.control(
                 iqr = &quot;IQR&quot;,
                 countpct = &quot;n (%)&quot;))
 
-# change_df &lt;- law_df %&gt;% 
-#  mutate()</code></pre>
+tbl &lt;- tableby(gender ~ dept + clin + cert + prate + exper + rank + sal94 + sal95 + dif_sal, data = law_df, control = control_tbl)
+summary(tbl, title = &quot;Descriptive Statistics: Salary and Covariates&quot;, labelTranslations = labels, text = T)</code></pre>
+<pre><code>## 
+## Table: Descriptive Statistics: Salary and Covariates
+## 
+## |                                           |         female (N=106)          |           male (N=155)           |
+## |:------------------------------------------|:-------------------------------:|:--------------------------------:|
+## |Department                                 |                                 |                                  |
+## |-  Biochemistry/Molecular Biology          |           20 (18.87%)           |           30 (19.35%)            |
+## |-  Physiology                              |           20 (18.87%)           |           20 (12.90%)            |
+## |-  Genetics                                |           11 (10.38%)           |            10 (6.45%)            |
+## |-  Pediatrics                              |           20 (18.87%)           |            10 (6.45%)            |
+## |-  Medicine                                |           30 (28.30%)           |           50 (32.26%)            |
+## |-  Surgery                                 |            5 (4.72%)            |           35 (22.58%)            |
+## |Clinical or Research, n(%)                 |                                 |                                  |
+## |-  clinical                                |           46 (43.40%)           |           55 (35.48%)            |
+## |-  research                                |           60 (56.60%)           |           100 (64.52%)           |
+## |Board certified, n(%)                      |                                 |                                  |
+## |-  Not certified                           |           36 (33.96%)           |           37 (23.87%)            |
+## |-  Board certified                         |           70 (66.04%)           |           118 (76.13%)           |
+## |Publicaiton rate                           |                                 |                                  |
+## |-  Mean (SD)                               |           5.35 (1.89)           |           4.65 (1.94)            |
+## |-  Median (Q1, Q3)                         |        5.25 (3.73, 7.27)        |        4.00 (3.10, 6.70)         |
+## |-  IQR                                     |              3.55               |               3.60               |
+## |Experience period after MD                 |                                 |                                  |
+## |-  Mean (SD)                               |           7.49 (4.17)           |           12.10 (6.70)           |
+## |-  Median (Q1, Q3)                         |       7.00 (5.00, 10.00)        |       10.00 (7.00, 15.00)        |
+## |-  IQR                                     |              5.00               |               8.00               |
+## |Professor title, n(%)                      |                                 |                                  |
+## |-  assistant                               |           69 (65.09%)           |           43 (27.74%)            |
+## |-  associate                               |           21 (19.81%)           |           43 (27.74%)            |
+## |-  full                                    |           16 (15.09%)           |           69 (44.52%)            |
+## |Salary in 1994                             |                                 |                                  |
+## |-  Mean (SD)                               |      118871.27 (56168.01)       |       177338.76 (85930.54)       |
+## |-  Median (Q1, Q3)                         | 108457.00 (75774.50, 143096.00) | 155006.00 (109687.00, 231501.50) |
+## |-  IQR                                     |            67321.50             |            121814.50             |
+## |Salary in 1995                             |                                 |                                  |
+## |-  Mean (SD)                               |      130876.92 (62034.51)       |       194914.09 (94902.73)       |
+## |-  Median (Q1, Q3)                         | 119135.00 (82345.25, 154170.50) | 170967.00 (119952.50, 257163.00) |
+## |-  IQR                                     |            71825.25             |            137210.50             |
+## |Difference of salary between 1994 and 1995 |                                 |                                  |
+## |-  Mean (SD)                               |       12005.64 (6317.99)        |        17575.33 (9727.36)        |
+## |-  Median (Q1, Q3)                         |  10719.00 (7662.75, 14945.75)   |  15158.00 (10972.00, 22472.50)   |
+## |-  IQR                                     |             7283.00             |             11500.50             |</code></pre>
 </div>
 
 

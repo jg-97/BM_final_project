@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1575576477515.000,
-    "dirty" : false,
+    "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "0",
     "id" : "930FF390",
     "lastKnownWriteTime" : 1568756824,
-    "last_content_update" : 1568756824,
+    "last_content_update" : 1575578227691,
     "path" : "E:/BM_hw1_jg4197/hw1_jg4197.Rmd",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "26,1",
-        "scrollLine" : "16"
+        "cursorPosition" : "60,120",
+        "scrollLine" : "51"
     },
     "read_only" : false,
     "read_only_alternatives" : [
