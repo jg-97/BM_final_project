@@ -11,8 +11,9 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE)
 library(tidyverse)
 library(caret)
-library(glmnet)
 library(arsenal)
+library(ggcorrplot)
+theme_set(theme_minimal())
 ```
 
 ## load and clean the data
@@ -61,21 +62,57 @@ tbl <- tableby(gender ~ dept + clin + cert + prate + exper + rank + sal94 + sal9
 summary(tbl, title = "Descriptive Statistics: Salary and Covariates", labelTranslations = labels, text = T)
 ```
 
+## histogram to test the normality and do transformation
+
+```{r}
+law_df %>% 
+  ggplot(aes(x = sal94, y = ..density..)) + 
+  geom_histogram(fill = "orange") + geom_density(alpha = .4, fill = "orange") +
+  labs(x = "Salary in 1994(10^5)",
+       y = "Density(10^-6)",
+       title = "Histogram with density plot of Y") +
+  scale_x_continuous(breaks = c(100000, 200000, 300000, 400000),
+                     labels = c(10, 20, 30, 40)) +
+  scale_y_continuous(breaks = c(0, 0.000002, 0.000004, 0.000006, 0.000008),
+                     labels = c(0, 2, 4, 6, 8)) +
+  theme(plot.title = element_text(size = 18, face = "bold"),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12,face = "bold")) 
+## left-skewness
+
+## do transformation of y
+law_df <- law_df %>% 
+  mutate(sal94 = log(sal94))
+
+law_df %>% 
+  ggplot(aes(x = sal94, y = ..density..)) + 
+  geom_histogram(fill = "orange") + geom_density(alpha = .4, fill = "orange") +
+  labs(x = "Natural logarithm of Salary in 1994",
+       y = "Density",
+       title = "Histogram with density plot of transforamed Y") +
+  theme(plot.title = element_text(size = 18, face = "bold"),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12,face = "bold")) 
+## following normal distribution
+```
+
+We neeed to use the log transformed Y to do following analysis.
+
+## boxplot to find that something can be confounders
+
 ```{r}
 law_df %>% 
   ggplot(aes(y = sal94, x = gender))+
   geom_boxplot(aes(fill = clin))+
-  theme_minimal()+
   labs(x = 'Salary in 94')
 
 law_df %>% 
   ggplot(aes(y = dif_sal, x = gender))+
   geom_boxplot(aes(fill = clin))+
-  theme_minimal()+
   labs(x = 'Difference in salary between 94 and 95')
 ```
 
-## automatic stepwise trying
+## automatic stepwise trying-----After consulting another senior, this step may be useless at last
 
 ```{r}
 full_ml <- lm(sal94 ~ dept + gender + clin + cert + prate + exper + rank, data = law_df)
@@ -84,19 +121,51 @@ step(lm(sal94 ~ 1., data = law_df), direction = 'forward', trace = 1, scope = fo
 step(full_ml, direction = 'both')
 ```
 
-## confounder
+It is strange that gender is not contained in the selected model. Combined with the boxplots, there should be confounders disturbing the result.
+
+
+## confounder-----most important analysis in this project
+for categorical confounder, we need to create a categorical table to do independence Chi squrae test.
 
 ```{r}
 ## dept tested
-gender <- lm(log(sal94) ~ gender, data = law_df)
-dep <- lm(log(sal94) ~ gender + dept, data = law_df)
+gender <- lm(sal94 ~ gender, data = law_df)
+dep <- lm(sal94 ~ gender + dept, data = law_df)
 summary(gender)
 summary(dep)
+## >10% change of coefficient
+
+## creating table between gender and department
+dept_tl <- table(law_df$dept, law_df$gender)
+dept_tl
+
+## do chi square test to test whether two predictors are independent
+chisq.test(dept_tl)
+## p-value = 0.0001704 < 0.01 < 0.5. We reject the null and conclude that gender and department are associated.
+## In other words, gender and dept have association meaning dept's distribution in gender has significant difference. 
+
+
 
 ## rank tested
 rank <- lm(log(sal94) ~ gender + rank, data = law_df)
 summary(rank)
+
+## creating table between gender and rank
+rank_tl <- table(law_df$rank, law_df$gender)
+rank_tl
+
+## do chi square test to test whether two predictors are independent
+chisq.test(rank_tl)
+## p-value = 0.000000003729 <<< 0.001. We reject the null and conclude that gender and rank are associated.
+## In other words, gender and dept have association meaning professors' title has has a significant difference in gender. 
 ```
+
+According to the Chi-square test results, department and rank are both associated with gender. Combined with the descriptive table, we find that surgery has more males than females. Full professors are more males than females. 
+
+However, the deparment difference in gender can be seen as a relatively 'objective' condition. Females may tend to study in other fields other than surgery which has higher income. In contrast, Assigning professor titles is more likely inclined to males which can be seen as a discrimination.
+
+Welcome to discuss since above is just a attempted interpretation.
+
 
 ## interaction
 
@@ -104,6 +173,18 @@ summary(rank)
 interaction <- lm(log(sal94) ~ gender * clin * cert * exper, data = law_df)
 summary(interaction)
 ```
+For interaction, based on a relatively large sample size, we choose to use 0.01 as a boundary and say it is unnecessary to consider the interaction.
 
+
+
+transformation-----log $MUST$ $DO$
+
+$MOST$ $IMPORTANT$ 
+dept~gender-----have difference but no discrimination
+rank~gender-----discrimination since most female are allocated into low level of professors
+We need to concerntrate on the confounder----categorical table may be $REQUIRED$
+
+$ANOTHER$ $IMPORTANT$
+vif----determine what should be deleted----'prate' can been deleted by collinearity
 
 
