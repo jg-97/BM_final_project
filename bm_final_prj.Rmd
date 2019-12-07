@@ -184,7 +184,40 @@ dept~gender-----have difference but no discrimination
 rank~gender-----discrimination since most female are allocated into low level of professors
 We need to concerntrate on the confounder----categorical table may be $REQUIRED$
 
+<<<<<<< HEAD
 $ANOTHER$ $IMPORTANT$
 vif----determine what should be deleted----'prate' can been deleted by collinearity
+=======
+# see if collinearity
+```{r}
+library(tidyverse)
+library(HH)
+
+lawsuit =  read.csv("Lawsuit.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(
+    dept =factor(dept),
+    gender=factor(gender),
+    clin = factor(clin),
+    cert = factor(cert),
+    rank = factor(rank),
+    lg_sal94 = log(sal94)
+  )
+
+law_origin = lawsuit %>% 
+  dplyr::select(-sal94,-sal95,-id,-prate)
+
+fit_origin = lm(lg_sal94~. ,data=law_origin)
+vif(fit_origin)
+
+fit_col1 =lm(clin~.-lg_sal94,data=law_origin)
+vif(fit_col1)
+
+fit_col2 = lm(dept~.-lg_sal94,data=law_origin)
+vif(fit_col2)
+
+
+```
+>>>>>>> cc4a8fbe8fd8ad85b7ab67b546d790b93f7d57d1
 
 
