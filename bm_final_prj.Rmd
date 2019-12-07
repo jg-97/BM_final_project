@@ -13,6 +13,7 @@ library(tidyverse)
 library(caret)
 library(arsenal)
 library(ggcorrplot)
+library(HH)
 theme_set(theme_minimal())
 ```
 
@@ -184,40 +185,42 @@ dept~gender-----have difference but no discrimination
 rank~gender-----discrimination since most female are allocated into low level of professors
 We need to concerntrate on the confounder----categorical table may be $REQUIRED$
 
-<<<<<<< HEAD
+
 $ANOTHER$ $IMPORTANT$
 vif----determine what should be deleted----'prate' can been deleted by collinearity
-=======
+
 # see if collinearity
 ```{r}
-library(tidyverse)
-library(HH)
+law_origin = law_df %>% 
+  dplyr::select(-sal95,-id,-prate)
 
-lawsuit =  read.csv("Lawsuit.csv") %>% 
-  janitor::clean_names() %>% 
-  mutate(
-    dept =factor(dept),
-    gender=factor(gender),
-    clin = factor(clin),
-    cert = factor(cert),
-    rank = factor(rank),
-    lg_sal94 = log(sal94)
-  )
-
-law_origin = lawsuit %>% 
-  dplyr::select(-sal94,-sal95,-id,-prate)
-
-fit_origin = lm(lg_sal94~. ,data=law_origin)
+fit_origin = lm(sal94~. ,data=law_origin)
 vif(fit_origin)
 
-fit_col1 =lm(clin~.-lg_sal94,data=law_origin)
+fit_col1 =lm(clin~.-sal94,data=law_origin)
 vif(fit_col1)
 
-fit_col2 = lm(dept~.-lg_sal94,data=law_origin)
+fit_col2 = lm(dept~.-sal94,data=law_origin)
 vif(fit_col2)
 
 
+## if we use collinearity to say we need to delete the prate
+## reload the data to craete coorelation plot
+law_col <- read_csv("./Lawsuit.csv") %>% 
+  janitor::clean_names() %>% 
+  dplyr::select(-sal95, -id)
+
+corr <- round(cor(law_col), 3)
+ggcorrplot(corr, hc.order = TRUE, type = "full", lab = TRUE)
+
+## vif when 'prate' is still in
+law_vif <- law_df %>% 
+  dplyr::select(-sal95, -id, -dif_sal)
+all_vb <- lm(sal94 ~., data = law_vif)
+vif(all_vb)
+
 ```
->>>>>>> cc4a8fbe8fd8ad85b7ab67b546d790b93f7d57d1
+
+Maybe we use the summary result to say that the 'prate' should be deleted from the analysis other than dept.....
 
 
